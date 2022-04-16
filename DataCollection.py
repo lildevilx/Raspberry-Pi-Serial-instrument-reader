@@ -31,6 +31,15 @@ data1=" "
 #####################
 ########Main#########
 #####################
+sercheck = True
+while sercheck == True:
+  try: 
+    ser = serial.Serial(ser_port, ser_baud)
+    ser.close()
+    sercheck = False
+  except serial.serialutil.SerialException:
+    print(ser_port+' not find, retry in 3 seconds\n')
+    time.sleep(3)
 while True:
   try:
     NF=open(FL+FN+'.csv','a') #setup file name to save
