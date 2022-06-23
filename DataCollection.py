@@ -25,8 +25,6 @@ waittime = 0.5 #seconds to wait in between reads (Not used)
 #####################
 ########Setup########
 #####################
-now = datetime.now()
-FN= now.strftime(FN)
 data1=" "
 #####################
 ########Main#########
@@ -36,13 +34,16 @@ while sercheck == True:
   try: 
     ser = serial.Serial(ser_port, ser_baud)
     ser.close()
+    print("Found, starting to log")
     sercheck = False
   except serial.serialutil.SerialException:
     print(ser_port+' not find, retry in 3 seconds\n')
     time.sleep(3)
 while True:
   try:
-    NF=open(FL+FN+'.csv','a') #setup file name to save
+    now = datetime.now()
+    FM= now.strftime(FN)
+    NF=open(FL+FM+'.csv','a') #setup file name to save
     ser = serial.Serial(ser_port, ser_baud) #open serial port
     data = ser.read_until(b'\r\n') #read serial data
     #print(data)
